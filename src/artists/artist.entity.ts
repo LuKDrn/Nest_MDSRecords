@@ -1,5 +1,5 @@
 import { Album } from "src/albums/album.entity";
-import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { ArtistGenre } from "./artist-genre.enum";
 import { ArtistNationality } from "./artist-nationality.enum";
 
