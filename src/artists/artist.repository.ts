@@ -1,4 +1,5 @@
 import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
+import { threadId } from "node:worker_threads";
 import { EntityRepository, Repository } from "typeorm";
 import { Artist } from "./artist.entity";
 import { AddArtistDto } from "./dto/add-artist.dto";
@@ -8,7 +9,7 @@ import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
 export class ArtistRepository extends Repository<Artist> {
 
     async getArtist(name: string) : Promise<Artist> {
-        const artist = await this.findOne({name : name});
+        const artist = await this.createQueryBuilder("artist").leftJoinAndSelect("artist.albums", "album").where({ name : name}).getOne();
         if (artist) {
             return artist;
         }
@@ -39,11 +40,5 @@ export class ArtistRepository extends Repository<Artist> {
         let artist = await this.getArtist(updateArtistPhotoDto.name);
         artist.photo = photo;
         return await this.save(artist);
-    }
-
-    async deleteArtist(name: string) : Promise<string> {
-        const artist = await this.getArtist(name);
-        await this.delete(artist);
-        return `${name} has been deleted from the database.`
     }
 }

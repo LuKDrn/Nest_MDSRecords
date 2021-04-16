@@ -14,7 +14,7 @@ export class AlbumService{
     ) {}
 
     async getAlbums(): Promise<Album[]> {
-        const albums = await this.albumRepository.find();
+        const albums = await this.albumRepository.createQueryBuilder('albums').leftJoinAndSelect("albums.artist", 'artist').getMany();
         console.log(`All album : Count : ${albums.length}`)
         return albums;
     }

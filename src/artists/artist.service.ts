@@ -1,5 +1,7 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { forwardRef, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { AlbumService } from "src/albums/album.service";
+import { CreateUpdateAlbumDto } from "src/albums/dto/createUpdate-album.dto";
 import { Artist } from "./artist.entity";
 import { ArtistRepository } from "./artist.repository";
 import { AddArtistDto } from "./dto/add-artist.dto";
@@ -13,7 +15,7 @@ export class ArtistService {
     ) { }
 
     async getArtists(): Promise<Artist[]> {
-        const artists = await this.artistRepository.find();
+        const artists = await this.artistRepository.createQueryBuilder("artist").leftJoinAndSelect("artist.albums", "albums").getMany();
         console.log(`All artist : Count : ${artists.length}`)
         return artists;
     }
@@ -36,6 +38,11 @@ export class ArtistService {
         return this.artistRepository.updateArtistPhoto(updateArtistPhotoDto);
     }
     async deleteArtist(name: string): Promise<string> {
-        return await this.artistRepository.deleteArtist(name);
+        const artist = await this.artistRepository.getArtist(name);
+        artist.albums.forEach(album => {
+            //Supprimer les albums de l'artiste
+        });
+        await this.artistRepository.delete(artist);
+        return `${name} has been deleted from the database.`
     }
 }

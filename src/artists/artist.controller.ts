@@ -47,5 +47,4 @@ export class ArtistController {
         return await this.artistService.deleteArtist(name);
     }
 
-
 }
