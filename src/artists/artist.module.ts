@@ -7,6 +7,7 @@ import { ArtistService } from "./artist.service";
 @Module({
     imports: [TypeOrmModule.forFeature([ArtistRepository])],
     controllers: [ArtistController],
-    providers: [ArtistService]
+    providers: [ArtistService],
+    exports: [ArtistService]
 })
 export class ArtistModule {}

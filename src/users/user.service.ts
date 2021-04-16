@@ -11,6 +11,10 @@ export class UserService{
         @InjectRepository(UserRepository)
         private userRepository : UserRepository,
     ) {}
+
+    async checkConnection(signInUserDto : SignInUserDto) : Promise<SignInUserDto>{
+        return;
+    } 
     async getUsers() : Promise<User[]> {
         return await this.userRepository.find();
     }

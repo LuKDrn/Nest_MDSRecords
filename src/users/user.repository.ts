@@ -1,14 +1,19 @@
-import { ConflictException } from "@nestjs/common";
+import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { SignInUserDto } from "./dto/signin-user.dto";
 import { User } from "./user.entity";
+import * as bcrypt from "bcrypt";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
     async getUser(email: string) : Promise<User> {
-        return await this.findOne({email : email});
+        const user = await this.findOne({email : email});
+        if (user) {
+            return user;
+        }
+        throw new HttpException('User does not exist', HttpStatus.NOT_FOUND);
     }
 
     async signIn(signInUserDto : SignInUserDto) : Promise<User> {
@@ -16,14 +21,13 @@ export class UserRepository extends Repository<User> {
     }
 
     async register(createUserDto : CreateUserDto) : Promise<User> {
-        const {username, email, password, firstName, lastName, photo} = createUserDto;
-        
+        const {username, email, password, photo} = createUserDto;
+
+        const salt = await bcrypt.genSalt();
         let user = new User();
         user.username = username;
+        user.password = await bcrypt.hash(password, salt);
         user.email = email;
-        user.password = password;
-        user.firstName = firstName;
-        user.lastName = lastName;
         user.photo = photo;
         
     

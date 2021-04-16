@@ -1,7 +1,5 @@
-import { ConflictException } from "@nestjs/common";
-import { exception } from "node:console";
+import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
-import { ArtistNationality } from "./artist-nationality.enum";
 import { Artist } from "./artist.entity";
 import { AddArtistDto } from "./dto/add-artist.dto";
 import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
@@ -10,7 +8,11 @@ import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
 export class ArtistRepository extends Repository<Artist> {
 
     async getArtist(name: string) : Promise<Artist> {
-        return await this.findOne({name : name});
+        const artist = await this.findOne({name : name});
+        if (artist) {
+            return artist;
+        }
+        throw new HttpException('Artist does not exist', HttpStatus.NOT_FOUND);
     }
 
     async addArtist(addArtistDto : AddArtistDto) : Promise<Artist> {
@@ -22,7 +24,7 @@ export class ArtistRepository extends Repository<Artist> {
         artist.photo = photo,
         artist.genre = genre
     
-        const artistInDbb =  this.getArtist(name);
+        const artistInDbb = await this.findOne({name : name});
         if(!artistInDbb){
             return await this.save(artist);
         }

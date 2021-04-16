@@ -14,7 +14,7 @@ export class ArtistService {
 
     async getArtists(): Promise<Artist[]> {
         const artists = await this.artistRepository.find();
-        console.log(`All tasks : Count : ${artists.length}`)
+        console.log(`All artist : Count : ${artists.length}`)
         return artists;
     }
 

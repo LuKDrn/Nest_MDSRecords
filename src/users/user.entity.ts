@@ -1,23 +1,33 @@
 import { Album } from "src/albums/album.entity";
-import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string; 
-    @Column()
+
+    @Column({
+        type: 'varchar', 
+        nullable: false 
+    })
     @Unique(['username'])
     username : string;
-    @Column()
+
+    @Column({
+        type: 'varchar', 
+        nullable: false 
+    })
     email: string;
-    @Column()
+
+    @Column({
+        type: 'varchar', 
+        nullable: false 
+    })
     password : string;
-    @Column()
-    firstName: string;
-    @Column()
-    lastName: string;
+
     @Column()
     photo: string;
+
     @ManyToMany(() => Album)
     @JoinTable()
     albums : Album[]
