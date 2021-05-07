@@ -17,11 +17,15 @@ export class UserRepository extends Repository<User> {
     }
 
     async signIn(signInUserDto : SignInUserDto) : Promise<User> {
-        return
+        const { email } = signInUserDto;
+
+        const user = new User();
+        const userFound = this.find({ email });
+        return user;
     }
 
     async register(createUserDto : CreateUserDto) : Promise<User> {
-        const {username, email, password, photo} = createUserDto;
+        const {username, email, password, photo, albums} = createUserDto;
 
         const salt = await bcrypt.genSalt();
         let user = new User();
@@ -29,11 +33,13 @@ export class UserRepository extends Repository<User> {
         user.password = await bcrypt.hash(password, salt);
         user.email = email;
         user.photo = photo;
+        user.albums = albums;
         
     
         const userInBdd =  this.getUser(email);
         if(!userInBdd){
-            return await this.save(user);
+            await user.save();
+            return user;
         }
         else {
             throw new ConflictException("A user with this email already exist.")

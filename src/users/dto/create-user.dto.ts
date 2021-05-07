@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsUrl } from "class-validator";
+import { Album } from "src/albums/album.entity";
 import { Unique } from "typeorm";
 
 export class CreateUserDto {
@@ -12,4 +13,6 @@ export class CreateUserDto {
     password: string;
     @IsUrl()
     photo: string;
+    
+    albums: Album[];
 }

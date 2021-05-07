@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { SignInUserDto } from "./dto/signin-user.dto";
 import { User } from "./user.entity";
 import { UserRepository } from "./user.repository";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService{
@@ -12,19 +13,28 @@ export class UserService{
         private userRepository : UserRepository,
     ) {}
 
-    async checkConnection(signInUserDto : SignInUserDto) : Promise<SignInUserDto>{
-        return;
-    } 
     async getUsers() : Promise<User[]> {
         return await this.userRepository.find();
     }
 
     async getUser(email : string) : Promise<User> {
-        return await this.userRepository.getUser(email);
+        const user = await this.userRepository.getUser(email);
+        if(user){
+            return user;
+        }
+        else {
+            throw new NotFoundException("User not found.");
+        }
     }
 
     async signIn(signInUserDto : SignInUserDto) : Promise<User> {
-        return await this.userRepository.signIn(signInUserDto);
+        const user = await this.userRepository.signIn(signInUserDto);
+        const isValid = await bcrypt.compare(signInUserDto.password, user.password);
+        if (isValid) {
+            return user;
+        } else {
+            throw new UnauthorizedException('Invalid credentials');
+        }
     }
 
     async register(createUserDto : CreateUserDto) : Promise<User> {

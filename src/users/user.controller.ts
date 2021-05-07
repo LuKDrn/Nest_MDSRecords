@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, NotAcceptableException, Param, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { AuthGuard } from "@nestjs/passport";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { SignInUserDto } from "./dto/signin-user.dto";
 import { JwtPayload } from "./jwt.payload";
