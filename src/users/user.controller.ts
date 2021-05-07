@@ -22,7 +22,7 @@ export class UserController {
 
     @Post('signIn')
     async signIn(@Body() signInUserDto: SignInUserDto) {
-        const userCheck = await this.userService.checkConnection(signInUserDto);
+        const userCheck = await this.getUser(signInUserDto.email);
         if(userCheck){
             const {username, email} = userCheck;
             const payload: JwtPayload = {username, email}
