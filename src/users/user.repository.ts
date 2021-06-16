@@ -1,4 +1,4 @@
-import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
+import { ConflictException, HttpException, HttpStatus, UnauthorizedException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { SignInUserDto } from "./dto/signin-user.dto";
@@ -9,19 +9,23 @@ import * as bcrypt from "bcrypt";
 export class UserRepository extends Repository<User> {
 
     async getUser(email: string) : Promise<User> {
-        const user = await this.findOne({email : email});
+        const user = await this.createQueryBuilder("user").where({email : email}).getOne();
         if (user) {
             return user;
         }
-        throw new HttpException('User does not exist', HttpStatus.NOT_FOUND);
+        return null;
     }
 
     async signIn(signInUserDto : SignInUserDto) : Promise<User> {
-        const { email } = signInUserDto;
-
-        const user = new User();
-        const userFound = this.find({ email });
-        return user;
+        const { email, password } = signInUserDto;
+        const user = await this.getUser(email);
+        const isValid = await bcrypt.compare(password, user.password);
+        if (!user && isValid) {
+            return user;
+        }
+        else {
+            throw new UnauthorizedException("Email ou mot de passe incorrecte.");
+        }
     }
 
     async register(createUserDto : CreateUserDto) : Promise<User> {
@@ -36,7 +40,7 @@ export class UserRepository extends Repository<User> {
         user.albums = albums;
         
     
-        const userInBdd =  this.getUser(email);
+        const userInBdd =  await this.getUser(email);
         if(!userInBdd){
             await user.save();
             return user;

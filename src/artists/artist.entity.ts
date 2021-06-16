@@ -16,7 +16,7 @@ export class Artist extends BaseEntity {
     @Column()
     genre: ArtistGenre;
 
-    @OneToMany(() => Album, album => album.artist)
+    @OneToMany(() => Album, album => album.artist, {cascade: true})
     albums: Album[];
 
 }

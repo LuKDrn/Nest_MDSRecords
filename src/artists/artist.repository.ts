@@ -1,5 +1,4 @@
 import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
-import { threadId } from "node:worker_threads";
 import { EntityRepository, Repository } from "typeorm";
 import { Artist } from "./artist.entity";
 import { AddArtistDto } from "./dto/add-artist.dto";
@@ -9,7 +8,7 @@ import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
 export class ArtistRepository extends Repository<Artist> {
 
     async getArtist(name: string) : Promise<Artist> {
-        const artist = await this.createQueryBuilder("artist").leftJoinAndSelect("artist.albums", "album").where({ name : name}).getOne();
+        const artist = await this.createQueryBuilder("artist").where({ name : name}).leftJoinAndSelect("artist.albums", "albums").innerJoinAndSelect("albums.songs", "songs").getOne();
         if (artist) {
             return artist;
         }

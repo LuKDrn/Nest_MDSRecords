@@ -12,8 +12,8 @@ export class Album extends BaseEntity {
     year : number;
     @Column()
     cover : string;
-    @OneToMany(() => Song, song => song.album)
+    @OneToMany(() => Song, song => song.album, { cascade: true})
     songs : Song[]
-    @ManyToOne(() => Artist, artist => artist.albums)
+    @ManyToOne(() => Artist, artist => artist.albums, { onDelete : 'CASCADE' })
     artist: Artist;
 }

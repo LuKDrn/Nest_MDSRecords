@@ -12,7 +12,7 @@ export class AlbumController {
         return await this.albumService.getAlbums()
     }
 
-    @Get('byTitle')
+    @Get('get')
     async getAlbum(@Query('title') title : string) : Promise<Album> {
         return this.albumService.getAlbumByTitle(title);
     }

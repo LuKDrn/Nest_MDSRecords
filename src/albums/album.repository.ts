@@ -8,11 +8,11 @@ import { CreateUpdateAlbumDto } from "./dto/createUpdate-album.dto";
 export class AlbumRepository extends Repository<Album> {
     
     async getAlbum(title: string) : Promise<Album> {        
-        const album = await this.createQueryBuilder('albums').where({ title : title }).leftJoinAndSelect("albums.artist", 'artist').getOne()
+        const album = await this.createQueryBuilder('album').where({ title : title }).leftJoinAndSelect("album.artist", 'artist').leftJoinAndSelect("album.songs", "songs").getOne()
         if (album) {
             return album;
         }
-        throw new HttpException('Album does not exist', HttpStatus.NOT_FOUND);
+        return null;
     }
 
     async createAlbum(createAlbumDto : CreateUpdateAlbumDto, artist : Artist) : Promise<Album> {
@@ -27,14 +27,6 @@ export class AlbumRepository extends Repository<Album> {
         }
     }
 
-    async updateAlbum(updateAlbumDto: CreateUpdateAlbumDto, artist : Artist): Promise<any> {
-        const {title} = updateAlbumDto;
-
-        let album = await this.getAlbum(title);
-        await this.deleteAlbum(album.title, artist);
-        await this.createAlbum(updateAlbumDto, artist);
-        return null;
-    }
 
     async deleteAlbum(title: string, artist : Artist) : Promise<string> {
         const album = await this.getAlbum(title);

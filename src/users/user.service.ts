@@ -29,12 +29,7 @@ export class UserService{
 
     async signIn(signInUserDto : SignInUserDto) : Promise<User> {
         const user = await this.userRepository.signIn(signInUserDto);
-        const isValid = await bcrypt.compare(signInUserDto.password, user.password);
-        if (isValid) {
-            return user;
-        } else {
-            throw new UnauthorizedException('Invalid credentials');
-        }
+        return user;
     }
 
     async register(createUserDto : CreateUserDto) : Promise<User> {

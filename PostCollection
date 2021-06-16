@@ -1,0 +1,680 @@
+{
+	"info": {
+		"_postman_id": "641e5fb0-dba4-4287-8706-131b2b16ba8d",
+		"name": "NestJs MdsRecords",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "Add Artist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Rex Orange County",
+									"type": "text"
+								},
+								{
+									"key": "nationality",
+									"value": "ENGLISH",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://images-na.ssl-images-amazon.com/images/I/61zM619EsLL._SL1200_.jpg",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "ALTERNATIVE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/artists/addArtist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								"addArtist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Artist By Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Rex Orange County",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/artists/byName?name=Rex Orange County",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								"byName"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Rex Orange County"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Artist Photo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/artists/photo?name=Rex Orange County",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								"photo"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Rex Orange County"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Artist Photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Rex Orange County",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://tse4.mm.bing.net/th?id=OIP.g3sPBzYt3Zn6v565nzUSkwHaHa&pid=Api",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/artists/updateArtistPhoto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								"updateArtistPhoto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Artist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/artists/Tame Impala",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								"Tame Impala"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Artists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/artists/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"artists",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Create Album",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "24 K Magic",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2016",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"value": "https://tse3.mm.bing.net/th?id=OIP.D0b98LcOfNLr_YJvAgqT-AAAAA&pid=Api",
+									"type": "text"
+								},
+								{
+									"key": "artistName",
+									"value": "Hervé ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/albums/createAlbum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"albums",
+								"createAlbum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Albums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/albums",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/albums/get?title=Le nouveau",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"albums",
+								"get"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Le nouveau"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Album",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "QELFQE",
+									"type": "text"
+								},
+								{
+									"key": "artistName",
+									"value": "Rex Orange County",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/albums/deleteAlbum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"albums",
+								"deleteAlbum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Album",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "daa78147-d128-4f9a-8da7-b6fadcba3feb",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Pony",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2019",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "artistName",
+									"value": "Rex Orange County",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/albums/updateAlbum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"albums",
+								"updateAlbum"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/users/get?email=johndoe@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"get"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "johndoe@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "JohnDoe",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "azertyuiop",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "john@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "https://upload.wikimedia.org/wikipedia/commons/3/33/South_Bay%2C_FL_John_Doe_1984.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "john@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "azertyuiop",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/users/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Song",
+			"item": [
+				{
+					"name": "Add Song",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Pluto projector",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "90",
+									"type": "text"
+								},
+								{
+									"key": "albumTitle",
+									"value": "Pony",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/songs/createSong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"songs",
+								"createSong"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Songs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get song by title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/songs/get?title=24K Magic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"songs",
+								"get"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "24K Magic"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Song",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "73fd9857-4d80-4c0e-88eb-d339b9126c3e",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "It's not the same",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "110",
+									"type": "text"
+								},
+								{
+									"key": "albumTitle",
+									"value": "Pony",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/songs/updateSong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"songs",
+								"updateSong"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Song",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "It's not the same",
+									"type": "text"
+								},
+								{
+									"key": "albumTitle",
+									"value": "Pony",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/songs/deleteSong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"songs",
+								"deleteSong"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

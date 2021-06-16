@@ -9,6 +9,6 @@ export class Song extends BaseEntity {
     title : string;
     @Column()
     duration: number;
-    @ManyToOne(() => Album, album => album.songs)
+    @ManyToOne(() => Album, album => album.songs, {onDelete: 'CASCADE'})
     album : Album;
 }

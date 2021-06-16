@@ -15,14 +15,14 @@ export class UserController {
         return await this.userService.getUsers();
     }
 
-    @Get(':email')
+    @Get('get')
     async getUser(@Param() email : string): Promise<User> {
         return await this.userService.getUser(email);
     }
 
     @Post('signIn')
     async signIn(@Body() signInUserDto: SignInUserDto) {
-        const userCheck = await this.getUser(signInUserDto.email);
+        const userCheck = await this.userService.signIn(signInUserDto);
         if(userCheck){
             const {username, email} = userCheck;
             const payload: JwtPayload = {username, email}
