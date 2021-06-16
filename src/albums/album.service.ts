@@ -18,8 +18,8 @@ export class AlbumService{
         return albums;
     }
 
-    async getAlbumByTitle(title: string): Promise<Album> {
-        const album = await this.albumRepository.getAlbum(title);
+    async getAlbumById(id: string): Promise<Album> {
+        const album = await this.albumRepository.getAlbum(id);
         if (album) {
             return album;
         }
@@ -29,28 +29,29 @@ export class AlbumService{
     }
 
     async createAlbum(createAlbumDto: CreateUpdateAlbumDto): Promise<Album> {
-        var artist = await this.artistService.getArtistByName(createAlbumDto.artistName);
+        var artist = await this.artistService.getArtistById(createAlbumDto.artistId);
         return await this.albumRepository.createAlbum(createAlbumDto, artist);
     }
 
     async updateAlbum(updateAlbumDto : CreateUpdateAlbumDto) : Promise<Album> {
-        const {id,title, year, cover, artistName} = updateAlbumDto;
+        const {id,title, year, cover, artistId} = updateAlbumDto;
 
-        let album = await this.albumRepository.createQueryBuilder('album').where({id : id}).leftJoinAndSelect("album.artist", 'artist').leftJoinAndSelect("album.songs", "songs").getOne()
+        let album = await this.getAlbumById(id);
         album.title = title;
         album.year = year;
         album.cover = cover;
-        if(album.artist.name != artistName){
-            let newArtist = await this.artistService.getArtistByName(artistName);
+        if(album.artist.id != artistId){
+            let newArtist = await this.artistService.getArtistById(artistId);
             album.artist = newArtist;
         }
         await this.albumRepository.save(album);
         return album;
     }
 
-    async deleteAlbum(deleteAlbumDto : CreateUpdateAlbumDto): Promise<string> {
-        var artist = await this.artistService.getArtistByName(deleteAlbumDto.artistName);
-        return await this.albumRepository.deleteAlbum(deleteAlbumDto.title, artist);
+    async deleteAlbum(deleteAlbumDto: CreateUpdateAlbumDto): Promise<string> {
+        const { id, artistId } = deleteAlbumDto;
+        var artist = await this.artistService.getArtistById(artistId);
+        return await this.albumRepository.deleteAlbum(id, artist);
     }
     
 }

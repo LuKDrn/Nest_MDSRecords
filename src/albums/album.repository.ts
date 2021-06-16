@@ -7,8 +7,8 @@ import { CreateUpdateAlbumDto } from "./dto/createUpdate-album.dto";
 @EntityRepository(Album)
 export class AlbumRepository extends Repository<Album> {
     
-    async getAlbum(title: string) : Promise<Album> {        
-        const album = await this.createQueryBuilder('album').where({ title : title }).leftJoinAndSelect("album.artist", 'artist').leftJoinAndSelect("album.songs", "songs").getOne()
+    async getAlbum(id: string) : Promise<Album> {        
+        const album = await this.createQueryBuilder('album').where({ id : id }).leftJoinAndSelect("album.artist", 'artist').leftJoinAndSelect("album.songs", "songs").getOne()
         if (album) {
             return album;
         }
@@ -16,10 +16,9 @@ export class AlbumRepository extends Repository<Album> {
     }
 
     async createAlbum(createAlbumDto : CreateUpdateAlbumDto, artist : Artist) : Promise<Album> {
-
         const album = this.create({...createAlbumDto, artist});
         (await artist).albums = [album];
-        const copy = await this.getAlbum(album.title);
+        const copy = await this.getAlbum(album.id);
         if(!copy){
             return await this.save(album);
         } else {
@@ -28,11 +27,11 @@ export class AlbumRepository extends Repository<Album> {
     }
 
 
-    async deleteAlbum(title: string, artist : Artist) : Promise<string> {
-        const album = await this.getAlbum(title);
+    async deleteAlbum(id: string, artist : Artist) : Promise<string> {
+        const album = await this.getAlbum(id);
         var index = await artist.albums.indexOf(album);
         artist.albums.splice(index, 1);
         await this.delete(album);
-        return `${title} has been deleted from the database.`
+        return `${album.title} has been deleted from the database.`
     }
 }

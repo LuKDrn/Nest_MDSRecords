@@ -18,8 +18,8 @@ export class ArtistService {
         return artists;
     }
 
-    async getArtistByName(name: string): Promise<Artist> {
-        const artist = await this.artistRepository.getArtist(name);
+    async getArtistById(id: string): Promise<Artist> {
+        const artist = await this.artistRepository.getArtist(id);
         if (artist) {
             return artist;
         }
@@ -35,9 +35,9 @@ export class ArtistService {
     async updateArtistPhoto(updateArtistPhotoDto : UpdateArtistPhotoDto) : Promise<Artist> {
         return this.artistRepository.updateArtistPhoto(updateArtistPhotoDto);
     }
-    async deleteArtist(name: string): Promise<string> {
-        const artist = await this.artistRepository.getArtist(name);
+    async deleteArtist(id: string): Promise<string> {
+        const artist = await this.artistRepository.getArtist(id);
         await this.artistRepository.remove(artist);
-        return `${name} has been deleted from the database.`
+        return `${artist.name} has been deleted from the database.`
     }
 }

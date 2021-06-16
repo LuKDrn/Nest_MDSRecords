@@ -10,5 +10,5 @@ export class CreateUpdateAlbumDto {
     @IsNotEmpty()
     cover : string;
     @IsNotEmpty()
-    artistName: string;
+    artistId: string;
 }

@@ -54,7 +54,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Artist By Name",
+					"name": "Get Artist By Id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -73,7 +73,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3001/artists/byName?name=Rex Orange County",
+							"raw": "http://localhost:3001/artists/byId?id=e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,12 +81,12 @@
 							"port": "3001",
 							"path": [
 								"artists",
-								"byName"
+								"byId"
 							],
 							"query": [
 								{
-									"key": "name",
-									"value": "Rex Orange County"
+									"key": "id",
+									"value": "e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d"
 								}
 							]
 						}
@@ -99,7 +99,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/artists/photo?name=Rex Orange County",
+							"raw": "http://localhost:3001/artists/photo?id=e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -111,8 +111,8 @@
 							],
 							"query": [
 								{
-									"key": "name",
-									"value": "Rex Orange County"
+									"key": "id",
+									"value": "e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d"
 								}
 							]
 						}
@@ -128,8 +128,8 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "name",
-									"value": "Rex Orange County",
+									"key": "id",
+									"value": "e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d",
 									"type": "text"
 								},
 								{
@@ -160,7 +160,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/artists/Tame Impala",
+							"raw": "http://localhost:3001/artists/e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -168,7 +168,7 @@
 							"port": "3001",
 							"path": [
 								"artists",
-								"Tame Impala"
+								"e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d"
 							]
 						}
 					},
@@ -264,12 +264,12 @@
 					"response": []
 				},
 				{
-					"name": "Get album by title",
+					"name": "Get album by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/albums/get?title=Le nouveau",
+							"raw": "http://localhost:3001/albums/get?id=daa78147-d128-4f9a-8da7-b6fadcba3feb",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -281,8 +281,8 @@
 							],
 							"query": [
 								{
-									"key": "title",
-									"value": "Le nouveau"
+									"key": "id",
+									"value": "daa78147-d128-4f9a-8da7-b6fadcba3feb"
 								}
 							]
 						}
@@ -298,13 +298,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "title",
-									"value": "QELFQE",
+									"key": "id",
+									"value": "daa78147-d128-4f9a-8da7-b6fadcba3feb",
 									"type": "text"
 								},
 								{
-									"key": "artistName",
-									"value": "Rex Orange County",
+									"key": "artistId",
+									"value": "e9e5ac06-01b9-414a-89b1-1f2eaa37ae1d",
 									"type": "text"
 								}
 							]
@@ -569,12 +569,12 @@
 					"response": []
 				},
 				{
-					"name": "Get song by title",
+					"name": "Get song by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/songs/get?title=24K Magic",
+							"raw": "http://localhost:3001/songs/get?id=94767864-f174-4c4e-ab4a-1ca94a1e3b53",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -586,8 +586,8 @@
 							],
 							"query": [
 								{
-									"key": "title",
-									"value": "24K Magic"
+									"key": "id",
+									"value": "94767864-f174-4c4e-ab4a-1ca94a1e3b53"
 								}
 							]
 						}
@@ -648,13 +648,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "title",
-									"value": "It's not the same",
+									"key": "id",
+									"value": "94767864-f174-4c4e-ab4a-1ca94a1e3b53",
 									"type": "text"
 								},
 								{
-									"key": "albumTitle",
-									"value": "Pony",
+									"key": "albumId",
+									"value": "daa78147-d128-4f9a-8da7-b6fadcba3feb",
 									"type": "text"
 								}
 							]

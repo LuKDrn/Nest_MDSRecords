@@ -13,8 +13,8 @@ export class AlbumController {
     }
 
     @Get('get')
-    async getAlbum(@Query('title') title : string) : Promise<Album> {
-        return this.albumService.getAlbumByTitle(title);
+    async getAlbum(@Query('id') id : string) : Promise<Album> {
+        return this.albumService.getAlbumById(id);
     }
 
     @Post('createAlbum')

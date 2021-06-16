@@ -7,8 +7,8 @@ import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
 @EntityRepository(Artist)
 export class ArtistRepository extends Repository<Artist> {
 
-    async getArtist(name: string) : Promise<Artist> {
-        const artist = await this.createQueryBuilder("artist").where({ name : name}).leftJoinAndSelect("artist.albums", "albums").innerJoinAndSelect("albums.songs", "songs").getOne();
+    async getArtist(id: string) : Promise<Artist> {
+        const artist = await this.createQueryBuilder("artist").where({ id : id}).leftJoinAndSelect("artist.albums", "albums").innerJoinAndSelect("albums.songs", "songs").getOne();
         if (artist) {
             return artist;
         }
@@ -34,9 +34,9 @@ export class ArtistRepository extends Repository<Artist> {
     }
 
     async updateArtistPhoto(updateArtistPhotoDto: UpdateArtistPhotoDto): Promise<Artist> {
-        const {photo} = updateArtistPhotoDto;
+        const {id, photo} = updateArtistPhotoDto;
 
-        let artist = await this.getArtist(updateArtistPhotoDto.name);
+        let artist = await this.getArtist(id);
         artist.photo = photo;
         return await this.save(artist);
     }

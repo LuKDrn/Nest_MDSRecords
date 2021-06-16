@@ -13,8 +13,8 @@ export class SongController {
     }
 
     @Get('get')
-    async getSong(@Query('title') title : string) : Promise<Song> {
-        return this.songService.getSongByTitle(title);
+    async getSong(@Query('id') id : string) : Promise<Song> {
+        return this.songService.getSongById(id);
     }
 
     @Post('createSong')

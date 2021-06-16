@@ -15,14 +15,14 @@ export class ArtistController {
         return await this.artistService.getArtists()
     }
 
-    @Get('byName')
-    async getArtist(@Query('name') name : string) : Promise<Artist> {
-        return this.artistService.getArtistByName(name);
+    @Get('byId')
+    async getArtist(@Query('id') id : string) : Promise<Artist> {
+        return this.artistService.getArtistById(id);
     }
     
     @Get("photo")
-    async getArtistPhoto(@Query('name') name : string) : Promise<string> {
-        var artist = await this.artistService.getArtistByName(name);
+    async getArtistPhoto(@Query('id') id : string) : Promise<string> {
+        var artist = await this.artistService.getArtistById(id);
         return artist.photo;
     }
 
@@ -42,9 +42,9 @@ export class ArtistController {
         return this.artistService.updateArtistPhoto(updateArtistPhotoDto);
     }
 
-    @Delete(':name')
-    async deleteArtist(@Param('name') name: string) {
-        return await this.artistService.deleteArtist(name);
+    @Delete('removeArtist')
+    async deleteArtist(@Param('id') id: string) {
+        return await this.artistService.deleteArtist(id);
     }
 
 }
