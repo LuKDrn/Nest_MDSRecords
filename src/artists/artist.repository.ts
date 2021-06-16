@@ -12,7 +12,7 @@ export class ArtistRepository extends Repository<Artist> {
         if (artist) {
             return artist;
         }
-        throw new HttpException('Artist does not exist', HttpStatus.NOT_FOUND);
+        throw new HttpException('Artist not found', HttpStatus.NOT_FOUND);
     }
 
     async addArtist(addArtistDto : AddArtistDto) : Promise<Artist> {
