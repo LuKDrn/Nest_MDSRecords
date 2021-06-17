@@ -4,7 +4,7 @@ import { CreateUpdateAlbumDto } from "src/albums/dto/createUpdate-album.dto";
 import { Artist } from "./artist.entity";
 import { ArtistRepository } from "./artist.repository";
 import { AddArtistDto } from "./dto/add-artist.dto";
-import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
+import { UpdateArtistDto } from "./dto/update-artist.dto";
 
 @Injectable()
 export class ArtistService {
@@ -32,8 +32,8 @@ export class ArtistService {
         return await this.artistRepository.addArtist(addArtistDto);
     }
 
-    async updateArtistPhoto(updateArtistPhotoDto : UpdateArtistPhotoDto) : Promise<Artist> {
-        return this.artistRepository.updateArtistPhoto(updateArtistPhotoDto);
+    async updateArtist(updateArtistDto : UpdateArtistDto) : Promise<Artist> {
+        return this.artistRepository.updateArtist(updateArtistDto);
     }
     async deleteArtist(id: string): Promise<string> {
         const artist = await this.artistRepository.getArtist(id);

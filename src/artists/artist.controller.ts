@@ -4,7 +4,7 @@ import { ArtistNationality } from "./artist-nationality.enum";
 import { Artist } from "./artist.entity";
 import { ArtistService } from "./artist.service";
 import { AddArtistDto } from "./dto/add-artist.dto";
-import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
+import { UpdateArtistDto } from "./dto/update-artist.dto";
 
 @Controller('artists')
 export class ArtistController {
@@ -37,9 +37,9 @@ export class ArtistController {
         }
     }
 
-    @Put('updateArtistPhoto')
-    async updateArtistPhoto(@Body() updateArtistPhotoDto : UpdateArtistPhotoDto){
-        return this.artistService.updateArtistPhoto(updateArtistPhotoDto);
+    @Put('updateArtist')
+    async updateArtist(@Body() updateArtistDto : UpdateArtistDto){
+        return this.artistService.updateArtist(updateArtistDto);
     }
 
     @Delete('removeArtist')

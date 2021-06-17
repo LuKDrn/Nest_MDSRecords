@@ -2,7 +2,7 @@ import { ConflictException, HttpException, HttpStatus } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { Artist } from "./artist.entity";
 import { AddArtistDto } from "./dto/add-artist.dto";
-import { UpdateArtistPhotoDto } from "./dto/update-artist.dto";
+import { UpdateArtistDto } from "./dto/update-artist.dto";
 
 @EntityRepository(Artist)
 export class ArtistRepository extends Repository<Artist> {
@@ -33,11 +33,15 @@ export class ArtistRepository extends Repository<Artist> {
         }
     }
 
-    async updateArtistPhoto(updateArtistPhotoDto: UpdateArtistPhotoDto): Promise<Artist> {
-        const {id, photo} = updateArtistPhotoDto;
+    async updateArtist(updateArtistDto: UpdateArtistDto): Promise<Artist> {
+        const {id, name, photo, genre, nationality} = updateArtistDto;
 
         let artist = await this.getArtist(id);
-        artist.photo = photo;
+        artist.name = name != undefined ? name : artist.name;
+        artist.photo = photo != undefined ? photo : artist.photo;
+        artist.genre = genre != undefined ? genre : artist.genre;
+        artist.nationality = nationality != undefined ? nationality : artist.nationality;
+
         return await this.save(artist);
     }
 }
