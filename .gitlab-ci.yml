@@ -7,7 +7,7 @@ stages:
 Lint:
  stage: check
  only:
-    - develope
+    - develop
  before_script:
     - yarn install --frozen-lockfile
  script:
@@ -16,7 +16,7 @@ Lint:
 Build:
    stage: build
    only:
-    - develope
+    - develop
    before_script:
     - yarn istall --frozen-lockfile
    script:
