@@ -50,9 +50,9 @@ export class UserRepository extends Repository<User> {
         }
     }
 
-    async deleteUser(email : string) : Promise<string> {
-        const user = await this.getUser(email);
+    async deleteUser(id : string) : Promise<string> {
+        const user = await this.createQueryBuilder("user").where({id : id}).getOne();
         await this.delete(user);
-        return `The user ${email} has been deleted.`
+        return `The user ${id} has been deleted.`
     }
 }

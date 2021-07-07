@@ -41,8 +41,8 @@ export class UserController {
         return await this.userService.register(createUserDto);
     }
 
-    @Delete(':email')
-    async deleteUser(@Param() email : string): Promise<string> {
-        return this.userService.deleteUser(email);
+    @Delete('deleteAccount')
+    async deleteUser(@Param('id') id : string): Promise<string> {
+        return this.userService.deleteUser(id);
     }
 }

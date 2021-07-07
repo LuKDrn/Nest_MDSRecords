@@ -36,7 +36,7 @@ export class UserService{
         return await this.userRepository.register(createUserDto);
     }
 
-    async deleteUser(email : string) : Promise<string> {
-        return await this.userRepository.deleteUser(email);
+    async deleteUser(id : string) : Promise<string> {
+        return await this.userRepository.deleteUser(id);
     }
 }
