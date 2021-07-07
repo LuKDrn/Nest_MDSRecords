@@ -1,0 +1,23 @@
+image: node:latest
+
+stages:
+  - check
+  - build
+
+Lint:
+ stage: check
+ only:
+    - develope
+ before_script:
+    - yarn install --frozen-lockfile
+ script:
+    - yarn lint
+
+Build:
+   stage: build
+   only:
+    - develope
+   before_script:
+    - yarn istall --frozen-lockfile
+   script:
+      - yarn build
