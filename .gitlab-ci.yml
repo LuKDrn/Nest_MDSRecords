@@ -18,6 +18,6 @@ Build:
    only:
     - develop
    before_script:
-    - yarn istall --frozen-lockfile
+    - yarn install --frozen-lockfile
    script:
       - yarn build
