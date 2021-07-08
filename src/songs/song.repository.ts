@@ -7,7 +7,7 @@ import { Song } from "./song.entity";
 @EntityRepository(Song)
 export class SongRepository extends Repository<Song> {
     async getSong(id: string) : Promise<Song> {        
-        const song = await this.createQueryBuilder('song').where({id : id}).innerJoinAndSelect("song.album", "album").leftJoinAndSelect("album.artist", "artist").getOne()
+        const song = await this.findOne(id,{relations:["album","album.artist"]});
         if (song) {
             return song;
         }
