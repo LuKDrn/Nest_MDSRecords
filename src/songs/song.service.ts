@@ -16,7 +16,7 @@ export class SongService{
     ) {}
     
     async getSongs(): Promise<Song[]> {
-        const songs = await this.songRepository.createQueryBuilder('songs').innerJoinAndSelect("songs.album", "album").leftJoinAndSelect("album.artist", "artist").getMany();
+        const songs = await this.songRepository.find({relations:["album","album.artist"]});
         return songs;
     }
 

@@ -8,7 +8,7 @@ import { CreateUpdateAlbumDto } from "./dto/createUpdate-album.dto";
 export class AlbumRepository extends Repository<Album> {
     
     async getAlbum(id: string) : Promise<Album> {        
-        const album = await this.createQueryBuilder('album').where({ id : id }).leftJoinAndSelect("album.artist", 'artist').leftJoinAndSelect("album.songs", "songs").getOne()
+        const album = await this.findOne(id,{relations:["artist","songs"]});
         if (album) {
             return album;
         }

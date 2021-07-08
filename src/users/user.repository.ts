@@ -9,7 +9,7 @@ import * as bcrypt from "bcrypt";
 export class UserRepository extends Repository<User> {
 
     async getUser(email: string) : Promise<User> {
-        const user = await this.createQueryBuilder("user").where({email : email}).getOne();
+        const user = await this.findOne(email);
         if (user) {
             return user;
         }

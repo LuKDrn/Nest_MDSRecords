@@ -6,7 +6,7 @@ export const typeormConfig: TypeOrmModuleOptions = {​
     port: +process.env.DATABASE_PORT || 5432,
     username: process.env.DATABASE_USER || 'postgres',
     password: process.env.DATABASE_PWD || '2Edc9890dff',
-    database: process.env.DATABASE_NAME || 'taskmanagement',
+    database: process.env.DATABASE_NAME || 'mdsRecords',
     autoLoadEntities: true,
     synchronize: true,
    };

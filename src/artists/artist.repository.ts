@@ -8,7 +8,7 @@ import { UpdateArtistDto } from "./dto/update-artist.dto";
 export class ArtistRepository extends Repository<Artist> {
 
     async getArtist(id: string) : Promise<Artist> {
-        const artist = await this.createQueryBuilder("artist").where({ id : id}).leftJoinAndSelect("artist.albums", "albums").innerJoinAndSelect("albums.songs", "songs").getOne();
+        const artist = await this.findOne(id,{relations:["albums","albums.songs"]});
         if (artist) {
             return artist;
         }
